@@ -4,7 +4,7 @@
 // Generated from box2d commit: b864f53 2024-09-29
 // Generator version: 0.8
 
-#include <box2d/box2d.h>
+#include <box2d.h>
 
 #include <concepts>
 #include <cstddef>
@@ -538,7 +538,7 @@ namespace b2
         friend class MotorJoint;
         friend class PrismaticJoint;
 
-      protected:
+      public:
         b2JointId id{};
 
       public:
@@ -2190,7 +2190,7 @@ namespace b2
     template <typename D, bool ForceConst> int BasicChainInterface<D, ForceConst>::GetSegments(b2ShapeId& segmentArray, int capacity) const { return b2Chain_GetSegments(static_cast<const D &>(*this).Handle(), &segmentArray, capacity); }
     template <typename D, bool ForceConst> WorldRef BasicChainInterface<D, ForceConst>::GetWorld() requires (!ForceConst) { return b2Chain_GetWorld(static_cast<const D &>(*this).Handle()); }
     template <typename D, bool ForceConst> WorldConstRef BasicChainInterface<D, ForceConst>::GetWorld() const { return b2Chain_GetWorld(static_cast<const D &>(*this).Handle()); }
-    template <typename D, bool ForceConst> void BasicShapeInterface<D, ForceConst>::Destroy() requires (!ForceConst) { if (*this) { b2DestroyShape(static_cast<const D &>(*this).Handle()); static_cast<D &>(*this).id = {}; } }
+    template <typename D, bool ForceConst> void BasicShapeInterface<D, ForceConst>::Destroy() requires (!ForceConst) { if (*this) { b2DestroyShape(static_cast<const D &>(*this).Handle(), true); static_cast<D &>(*this).id = {}; } }
     template <typename D, bool ForceConst> bool BasicShapeInterface<D, ForceConst>::IsValid() const { return b2Shape_IsValid(static_cast<const D &>(*this).Handle()); }
     template <typename D, bool ForceConst> void BasicShapeInterface<D, ForceConst>::Set(const b2Capsule& capsule) requires (!ForceConst) { b2Shape_SetCapsule(static_cast<const D &>(*this).Handle(), &capsule); }
     template <typename D, bool ForceConst> void BasicShapeInterface<D, ForceConst>::Set(const b2Circle& circle) requires (!ForceConst) { b2Shape_SetCircle(static_cast<const D &>(*this).Handle(), &circle); }

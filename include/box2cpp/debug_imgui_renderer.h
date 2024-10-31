@@ -1,8 +1,8 @@
 #pragma once
 
-#include <box2cpp/box2cpp.h>
-#include <box2d/math_functions.h>
-#include <imgui.h>
+#include <box2cpp.h>
+#include <math_functions.h>
+#include <Core/imgui.h>
 
 namespace b2
 {
@@ -105,11 +105,11 @@ namespace b2
                 self.DrawLine(xf.p, b2Vec2(xf.p.x + xf.q.c * radius, xf.p.y + xf.q.s * radius), color);
             };
 
-            callbacks.DrawCapsule = [](b2Vec2 p1, b2Vec2 p2, float radius, b2HexColor color, void* context)
-            {
-                auto &self = *static_cast<DebugImguiRenderer *>(context);
-                self.DrawCapsule(p1, p2, radius, color);
-            };
+            //callbacks.DrawCapsule = [](b2Vec2 p1, b2Vec2 p2, float radius, b2HexColor color, void* context)
+            //{
+            //    auto &self = *static_cast<DebugImguiRenderer *>(context);
+            //    self.DrawCapsule(p1, p2, radius, color);
+            //};
 
             callbacks.DrawSolidCapsule = [](b2Vec2 p1, b2Vec2 p2, float radius, b2HexColor color, void* context)
             {
@@ -284,7 +284,7 @@ namespace b2
 
         ImVec2 Box2dToImguiDir(b2Vec2 dir) const
         {
-            float sign = y_axis_is_upwards ? -1 : 1;
+            float sign = y_axis_is_upwards ? -1.f : 1.f;
             ImVec2 ret(dir.x * camera_rot.c + dir.y * camera_rot.s, (-dir.x * camera_rot.s + dir.y * camera_rot.c) * sign);
             ret.x *= camera_scale;
             ret.y *= camera_scale;
@@ -311,7 +311,7 @@ namespace b2
             point.y -= ImGui::GetIO().DisplaySize.y / 2;
             point.x /= camera_scale;
             point.y /= camera_scale;
-            float sign = y_axis_is_upwards ? -1 : 1;
+            float sign = y_axis_is_upwards ? -1.f : 1.f;
             b2Vec2 ret(point.x * camera_rot.c - point.y * camera_rot.s * sign, point.x * camera_rot.s + point.y * camera_rot.c * sign);
             ret.x += camera_pos.x;
             ret.y += camera_pos.y;
@@ -373,8 +373,8 @@ namespace b2
                         if (i != 1)
                         {
                             if (angle < prev_angle)
-                                angle += f_pi * 2;
-                            DrawList().PathArcTo(prev_point, Box2dToImguiLength(radius), prev_angle - f_pi / 2, angle - f_pi / 2);
+                                angle += 3.14159265f * 2;
+                            DrawList().PathArcTo(prev_point, Box2dToImguiLength(radius), prev_angle - 3.14159265f / 2, angle - 3.14159265f / 2);
                         }
                         prev_angle = angle;
                     }
