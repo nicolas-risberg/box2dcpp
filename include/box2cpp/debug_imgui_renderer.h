@@ -2,7 +2,7 @@
 
 #include <box2cpp.h>
 #include <math_functions.h>
-#include <Core/imgui.h>
+#include <../../../imgui/imgui.h>
 
 namespace b2
 {
